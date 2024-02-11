@@ -3,8 +3,8 @@ Sa version jouable est aussi disponible sur ma page itch.io: https://kokomori.it
 
 Il a été réalisé en Python avec le module pyxres. Voici quels étaient les critères de mon professeur: https://kxs.fr/cours/projets/envahisseurs
 J'ai de plus rajouté plusieurs niveaux à difficulté croissante, une "notice de jeu", et plusieurs fonctionnalités: un rayon laser vertical, un horizontal, des vies en plus, un gros tir (tue aussi les ennemis adjacents en plus de celui touché), 
-une possibilité de gagner à 20 000 points, plus le vaisseau se fait toucher plus il est endommagé, des astéroides arrivant horizontalement sur le vaisseau, des vaisseaux spéciaux rapportant plus de points, et enfin la possibilité pour le joueur 
-pour 750 points de placer avec la souris des balises de téléportation (en en touchant une il se téléporte à l'autre et vice-versa).
+une possibilité de gagner à 20 000 points, plus le vaisseau se fait toucher plus il est endommagé, des astéroides arrivant horizontalement sur le vaisseau, des vaisseaux spéciaux rapportant plus de points, un arrière-plan mouvant, 
+et enfin la possibilité pour le joueur pour 750 points de placer avec la souris des balises de téléportation (en en touchant une il se téléporte à l'autre et vice-versa).
 
-Il se joue avec les flèches directionnelles et la souris (pour tirer)
+Il se joue avec les flèches directionnelles et la souris (pour tirer).
 J'ai également mis dans le dossier le code du jeu (aussi disponible surt itch.io), et si vous avez le module pyxres sur votre ordinateur, vous pouvez normalement le lancer sans problème.
