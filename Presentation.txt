@@ -1,0 +1,46 @@
+Cat_Em'Up est le premier jeu que j'ai programmé et programmé, en seconde, sur GameMaker. Vous pouvez y jouer sur Windows en le téléchargeant sur ma page itch.io: https://kokomori.itch.io/catem-up
+Il m'a pris entre 3 semaines et 1 mois à réaliser environ.
+
+Ce jeu est constitué de 5 niveaux ( + un niveau secret et un mode infini), d'une boutique pour acheter différents chats / projectiles avec de l'argent gagné dans le jeu, d'un boss de fin, d'une dizaine de bonus et d'un niveau tutoriel.
+Le but est de survivre durant le temps imparti pour chaque niveau. Vous pouvez vous déplacer avec les flèches directionnels, tirer des pelottes de laine sur vos ennemis avec la souris, et rouler avec la barre espace pour esquiver.
+Une barre de temps a été ajouté après la création du jeu pour vous indiquer combien de temps il vous reste à tenir. Vous perdez si vous n'avez plus de vie, ou si vous n'avez pas touché de souris dans les dernières secondes.
+
+Je ne m'en suis pas rendu compte quand je l'ai programmé, mais Cat'em_Up est un jeu trop dur pour la plupart des gens, je m'en suis rendu compte suite au retour que l'on m'a fait dessus, mais je n'ai pas encore pu corriger ce point.
+
+Voici une présentation rapide des différents éléments du jeu:
+
+Niveaux:
+- tutoriel
+- le salon
+- le toit
+- la rue
+- le parc (niveau spécial avec énormément de bonus et d'ennemis)
+- le city (niveau du boss)
+- niveau secret débloqué en cliquant sur tous les K dans le jeu
+- niveau infini ou le but est de tenir le plus longtemps possible (la difficulté est croissante au fil du temps)
+Chaque niveau se débloque en réussissant le précédent. Le niveau infini se débloque en terminant le jeu.
+
+Bonus:
+- expérience (donne des points de score)
+- expérience 2 (donne plus de points de score)
+- lait (remplit la barre de souris et redonne un coeur)
+- golden shoot (tir transperçants)
+- bombe (élimine tous les ennemis à l'écran)
+- étoile (rend invincible)
+- super tir (tire 3 pelottes et diminue le cooldown entre chaque tir)
+- Pac Man (vous devenz pac man et vous dirigez alors avec la souris)
+- Mini (vous devenez tout petit (réduction de la hit-box)
+- Speed (augmente grandement votre vitesse)
+
+Ennemis:
+- un boss de fin de jeu (bulldog)
+- la souris (il faut en tuer régulièrement sinon on perd)
+- chien normal (arrive juste sur l'écran, il ne faut pas le toucher)
+- un petit chien (se déplace verticalement, tire des balles de tennis horizontalement)
+- un chien saucisse (tourne dans la pièce en jetant sur vous des nonos)
+- le canard (si vous le tuez, disperse 3 oeufs faisant des dégâts)
+- la poule (vous pourchasse pour vous attaquer)
+- l'oiseau de feu (ne bouge pas, mais crée régulièrement des flammes sur le joueur qui doit donc bouger régulièrement pour les éviter)
+- un gros chien (qui crée une onde de choc esquivable qu'avec la roulade quand il s'assoit)
+- un petit chat (fait perdre du score quand on le tue)
+- le roi des souris (se déplace dans la pièce: vous ne pouvez pas tué de souris tant que vous ne l'avez pas tué)
