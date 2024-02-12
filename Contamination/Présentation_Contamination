@@ -5,3 +5,5 @@ Voici quels étaient les critères de la professeur ayant donné le projet: http
 J'ai de plus rajouté une interface entière grâce au module pyxres, avec de meilleurs graphismes que ceux des lignes de commandes (ce qui n'est pas très dur en soit), un bouton pour passer
 à l'étape de contamination suivante, un bouton pour réinitialiser l'expérience, deux boutons pour interférer dans le jeu (selon celui sélectionné, l'utilisateur peut transformer des cellules
 vivantes en cellules mortes et inversement), et enfin, selon la taille de la grille choisie, les sprites des cellules changent pour pouvoir afficher une grille à la fois belle et grande.
+
+Je vous ai mis en pièce jointe le programme de contamination, et les sprites sous le nom ressources si vous souhaitez le tester et que vous possédez le module pyxres.
