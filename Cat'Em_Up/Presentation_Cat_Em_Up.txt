@@ -1,11 +1,16 @@
-Cat_Em'Up est le premier jeu que j'ai programmé et publié, en seconde, sur GameMaker. Je n'ai pas pu le mettre ici car le fichier était trop volumineux, mais l'éxécutable est disponible sur ma page itch.io: https://kokomori.itch.io/catem-up
+Cat_Em'Up est le premier jeu que j'ai programmé et publié, en seconde, sur GameMaker. Je n'ai pas pu le mettre ici car le fichier était trop volumineux, mais l'éxécutable est disponible sur ma page itch.io:
+https://kokomori.itch.io/catem-up
 Il m'a pris entre 3 semaines et 1 mois à réaliser environ. 
 
-Ce jeu est constitué de 5 niveaux ( + un niveau secret et un mode infini), d'une boutique pour acheter différents chats / projectiles avec de l'argent gagné dans le jeu, d'un boss de fin, d'une dizaine de bonus et d'un niveau tutoriel.
-Le but est de survivre durant le temps imparti pour chaque niveau. Vous pouvez vous déplacer avec les flèches directionnels, tirer des pelottes de laine sur vos ennemis avec la souris, et rouler avec la barre espace pour esquiver.
-Une barre de temps a été ajouté après la création du jeu pour vous indiquer combien de temps il vous reste à tenir. Vous perdez si vous n'avez plus de vie, ou si vous n'avez pas touché de souris dans les dernières secondes.
+Ce jeu est constitué de 5 niveaux ( + un niveau secret et un mode infini), d'une boutique pour acheter différents chats / projectiles avec de l'argent gagné dans le jeu, d'un boss de fin, 
+d'une dizaine de bonus et d'un niveau tutoriel.
+Le but est de survivre durant le temps imparti pour chaque niveau. Vous pouvez vous déplacer avec les flèches directionnels, tirer des pelottes de laine sur vos ennemis avec la souris, et 
+rouler avec la barre espace pour esquiver.
+Une barre de temps a été ajouté après la création du jeu pour vous indiquer combien de temps il vous reste à tenir. Vous perdez si vous n'avez plus de vie, ou si vous n'avez pas touché de 
+souris dans les dernières secondes.
 
-Je ne m'en suis pas rendu compte quand je l'ai programmé, mais Cat'em_Up est un jeu trop dur pour la plupart des gens, je m'en suis rendu compte suite au retour que l'on m'a fait dessus, mais je n'ai pas encore pu corriger ce point.
+Je ne m'en suis pas rendu compte quand je l'ai programmé, mais Cat'em_Up est un jeu trop dur pour la plupart des gens, je m'en suis rendu compte suite au retour que l'on m'a fait dessus, mais 
+je n'ai pas encore pu corriger ce point.
 
 Voici une présentation rapide des différents éléments du jeu:
 
