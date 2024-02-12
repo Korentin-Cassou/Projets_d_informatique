@@ -1,0 +1,5 @@
+"Contamination", ou "jeu de le vie", était à l'origine un programme de NSI pour terminale que j'ai fais pour rattraper le programme de NSI.
+Je l'ai de plus amélioré grandement pour mon plaisir.
+
+Voici quels étaient les critères de la professeur ayant donné le projet: https://github.com/MarieGuichard/TNSI2324/blob/main/projets/JeuDeLaVie/enonce.md
+J'ai de plus rajouté une interface entière grâce au module pyxres, avec de meilleurs graphismes que ceux des lignes de commandes (ce qui n'est pas très dur en soit).
