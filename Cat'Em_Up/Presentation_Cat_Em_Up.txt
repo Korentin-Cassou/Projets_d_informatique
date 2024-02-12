@@ -1,4 +1,4 @@
-Cat_Em'Up est le premier jeu que j'ai programmé et programmé, en seconde, sur GameMaker. Je n'ai pas pu le mettre ici car le fichier était trop volumineux, mais l'éxécutable est disponible sur ma page itch.io: https://kokomori.itch.io/catem-up
+Cat_Em'Up est le premier jeu que j'ai programmé et publié, en seconde, sur GameMaker. Je n'ai pas pu le mettre ici car le fichier était trop volumineux, mais l'éxécutable est disponible sur ma page itch.io: https://kokomori.itch.io/catem-up
 Il m'a pris entre 3 semaines et 1 mois à réaliser environ. 
 
 Ce jeu est constitué de 5 niveaux ( + un niveau secret et un mode infini), d'une boutique pour acheter différents chats / projectiles avec de l'argent gagné dans le jeu, d'un boss de fin, d'une dizaine de bonus et d'un niveau tutoriel.
