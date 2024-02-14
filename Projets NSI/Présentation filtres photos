@@ -1,4 +1,0 @@
-Les projets présentés ici ne sont pas vraiment extrascolaires, ce sont plutôt des projets réalisés en première en python dans le cadre de la spécialité NSI.
-
-Le premier est un filtre photo (nécessitant le module PIL) qui, à partir d'une photo fournie à l'origine et des choix de l'utilisateur, fourni une autre image modifié. LEs filtres disponibles sont:
-- des échelles de teinte (rouge, vert, bleu, magenta, cyan, jaune et gris)

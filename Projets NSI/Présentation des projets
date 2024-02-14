@@ -1,0 +1,15 @@
+Les projets présentés ici ne sont pas vraiment extrascolaires, ce sont plutôt des projets réalisés en première en python dans le cadre de la spécialité NSI.
+
+Le premier est un filtre photo (nécessitant le module PIL) qui, à partir d'une photo fournie à l'origine et des choix de l'utilisateur, fourni une autre image modifié. Les filtres disponibles sont:
+- des échelles de teinte (rouge, vert, bleu, magenta, cyan, jaune et gris)
+- des colorisations d'intensité choisie par l'utilisateur (rouge, vert, bleu, magenta, cyan, jaune)
+- Noir et Blanc
+- Négatif
+- image miroir
+- Eclaircissement / obscurcissement plus ou moins grand
+- Pixellisation de l'image selon l'intensité voulue par l'utilisateur
+- "Old Game": un filtre qui renvoit une image en utilisant qu'un certain nombre de composantes colorimétriques
+
+Le second est un puissance 4 (où l'on peut chosir le nombre de pions à aligner, de colonnes et de lignes), jouable dans la console.
+
+Le troisième est un générateur automatique de fichier NFO renvoyant un NFO à partir d'un album de musique fourni (nécessite le module mutagen).
