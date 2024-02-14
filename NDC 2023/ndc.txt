@@ -1,0 +1,1414 @@
+import pyxel
+
+widthScreen = 128
+lenghtScreen = 128
+
+pyxel.init(128, 128, title="NDC 2023")
+pyxel.load("ressource.pyxres")
+
+sprite1 = [0, 0, 16, 16]
+
+actualScene = 1
+actualIntro = 1
+buttonArrow = [64,16,16,16]
+loupe = [32, 16, 8, 8]
+waitPushButton = 0
+object1 = [16,48, 8, 8]
+object2 = [40, 16, 8, 8]
+object3 = [32, 24, 8, 8]
+actualObject = 0
+object1Story = 0
+object2Story = 0
+object3Story = 0
+resultToAsk = 0
+resultScene = 1
+popCorn = [32, 80, 16, 16]
+
+quadrillage = []
+
+monocle = [0,32,16,16]
+
+niveau = 1
+musicPlayed = False
+
+souris_x, souris_y = 0,0
+
+niveau1Affiche = True
+
+appui1 = False
+
+appui21 = False
+appui22 = False
+appui23 = False
+appui24 = False
+
+victoireEnigme = False
+win = False
+winScene = 1
+defeatScene = 1
+
+
+coupable1 = [0,48,16,16]
+coupable2 = [32, 48, 16, 16]
+coupable3 = [48, 48, 16, 16]
+
+sceneCourante = 1
+
+reinitPos = False
+
+x = 128/2-8
+y = 128/2-8
+
+cadre = [80, 0, 32, 16]
+
+
+def update():
+    
+    global musicPlayed
+    
+    if musicPlayed == False:
+        
+        pyxel.play(0,3)
+        musicPlayed = True
+    
+    global waitPushButton
+    
+    print(actualScene, actualIntro)
+    waitPushButton = waitPushButton - 1
+    
+    pyxel.cls(0)
+    
+    
+    if actualScene == 1:
+        
+        pyxel.mouse(True)
+        intro()
+        
+    elif actualScene == 2:
+        
+        pyxel.mouse(False)
+        scene()
+        
+    elif actualScene == 3:
+        
+        pyxel.mouse(False)
+        result()
+        
+    elif actualScene == 4:
+        
+        pyxel.mouse(True)
+        win()
+        
+        
+    elif actualScene ==6:
+        
+        pyxel.mouse(True)
+        defeat()
+    
+    
+    
+    
+def draw():
+    
+    oui = 1
+    
+
+
+def result():
+    
+    global resultScene, waitPushButton, actualScene
+    
+    if resultScene == 1:
+        
+        text1 = "Votre enquete est terminee..."
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Charles Atan va etre heureux"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Alors, qui est le coupable ?"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        
+        buttonResult(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if resultScene == 2:
+        
+        text1 = "Designez un coupable"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 *2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        coordObject = centerObject(coupable1, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1], coupable1[2], coupable1[3], 0)
+        
+        if pyxel.mouse_x <= coordObject[0] + coupable1[2] / 2 and pyxel.mouse_x >= coordObject[0] - coupable1[2] / 2 and pyxel.mouse_y <= coordObject[1] + coupable1[3] / 2 and pyxel.mouse_y >= coordObject[1] - coupable1[3] / 2 or win == True:
+        
+            pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1] + 16, coupable1[2], coupable1[3], 0)
+            
+            if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0 or win == True:
+                
+                pyxel.play(0,1)
+                actualScene = actualScene + 1
+                waitPushButton = 20
+        
+        
+        coordObject = centerObject(coupable2, (widthScreen / 4) * 3, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable2[0], coupable2[1], coupable2[2], coupable2[3], 0)
+        
+        if pyxel.mouse_x <= coordObject[0] + coupable2[2] / 2 and pyxel.mouse_x >= coordObject[0] - coupable2[2] / 2 and pyxel.mouse_y <= coordObject[1] + coupable2[3] / 2 and pyxel.mouse_y >= coordObject[1] - coupable2[3] / 2:
+        
+            pyxel.blt(coordObject[0], coordObject[1], 1, coupable2[0], coupable2[1] + 16, coupable2[2], coupable2[3], 0)
+            
+            if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+                
+                pyxel.play(0,0)
+                actualScene = 6
+                waitPushButton = 20
+            
+            
+        
+        
+        coordObject = centerObject(coupable3, widthScreen / 4, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable3[0], coupable3[1], coupable3[2], coupable3[3], 0)
+        
+        
+        if pyxel.mouse_x <= coordObject[0] + coupable3[2] / 2 and pyxel.mouse_x >= coordObject[0] - coupable3[2] / 2 and pyxel.mouse_y <= coordObject[1] + coupable3[3] / 2 and pyxel.mouse_y >= coordObject[1] - coupable3[3] / 2:
+        
+            pyxel.blt(coordObject[0], coordObject[1], 1, coupable3[0], coupable3[1] + 16, coupable3[2], coupable3[3], 0)
+            
+            if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+                
+                pyxel.play(0, 0)
+                actualScene = 6
+                waitPushButton = 20
+        
+    pyxel.blt(pyxel.mouse_x, pyxel.mouse_y, 1, loupe[0], loupe[1], loupe[2], loupe[3], 0)
+    
+    
+    
+
+def defeat():
+
+    if defeatScene == 1:
+        
+        text1 = "Dommage..."
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Ce suspect n'a pas le film..."
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Relancez le jeu :) !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+
+
+def win():
+    
+    
+    
+    if winScene == 1:
+        
+        coordObject = centerObject(coupable1, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1], coupable1[2], coupable1[3], 0)
+        
+        text1 = "Jean Neimar..."
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -50, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Riche cinéaste holywoodien"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 40 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Fouillons le !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 40, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonWin(coordButton[0], coordButton[0], buttonArrow)
+    
+    if winScene == 2:
+        
+        coordObject = centerObject(coupable1, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1], coupable1[2], coupable1[3], 0)
+        
+        text1 = "Bravo !"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -50, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Il avait la pellicule du film !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 40 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Mais pourquoi Jean ?"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 40, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonWin(coordButton[0], coordButton[0], buttonArrow)
+        
+    if winScene == 3:
+        
+        coordObject = centerObject(coupable1, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1], coupable1[2], coupable1[3], 0)
+        
+        text1 = "J avais faim,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -50, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Et j'avais que ca sous la main"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 40 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Charles est heureux"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 40, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonWin(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if winScene == 4:
+        
+        coordObject = centerObject(coupable1, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, coupable1[0], coupable1[1], coupable1[2], coupable1[3], 0)
+        
+        text1 = "Felicitation Bob"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -50, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Vous etes un justicier"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 40 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Vous obtenez la reputation,"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 40, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonWin(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if winScene == 5:
+        
+        coordObject = centerObject(popCorn, widthScreen / 2, lenghtScreen / 2)
+        pyxel.blt(coordObject[0], coordObject[1], 1, popCorn[0], popCorn[1], popCorn[2], popCorn[3], 0)
+        
+        text1 = "et le pop-corn gratuit !"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -50, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        
+        text3 = "BRAVO !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 50, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+
+
+
+
+
+
+def scene():
+    
+    if actualObject == 0:
+        
+        pyxel.blt(0, 0, 2, 0, 0, 128, 128, 0)
+        object1_f()
+        object2_f()
+        object3_f()
+        
+        
+        if resultToAsk == 3:
+                       
+            coordButton = [(widthScreen / 16) * 14, 20]
+            buttonToResult(coordButton[0], coordButton[0], buttonArrow)
+            
+        pyxel.blt(pyxel.mouse_x, pyxel.mouse_y, 1, loupe[0], loupe[1], loupe[2], loupe[3], 0)
+            
+            
+        
+        
+    if actualObject == 1:
+        
+        objectScene1()
+        pyxel.mouse(True)
+    
+    
+    if actualObject == 2:
+        
+        objectScene2()
+        pyxel.mouse(True)
+        
+        
+    if actualObject == 3:
+            
+        objectScene3()
+        pyxel.mouse(True)
+
+
+
+def objectScene3():
+    
+    
+    if object3Story == 0:
+        
+        text1 = "Ohhh my gaaad"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Une... banane !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "C est dangereux !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject3(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if object3Story == 1:
+        
+        text1 = "Vous vous rappelez"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "qui l a jete"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "SOUVENEZ VOUS !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        text4 = "Trouvez le seul perso unique"
+        coord4 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 30, text4)
+        pyxel.text(coord4[0], coord4[1], text4, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject3(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+    if object3Story == 2:
+        
+        pyxel.mouse(True)
+        memory()
+        
+        
+    if object3Story == 3:
+        
+        text1 = "Vous vous rappelez !"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "C est vous "
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "qui avez jete cette banane :)"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        text4 = "Dommage"
+        coord4 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 30, text4)
+        pyxel.text(coord4[0], coord4[1], text4, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1End(coordButton[0], coordButton[0], buttonArrow)
+
+
+
+def objectScene2():
+    
+    
+    if object2Story == 0:
+        
+        text1 = "Tiens tiens tiens..."
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Un..."
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Journal !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject2(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+    if object2Story == 1:
+        
+        text1 = "Dechiffrez-le"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "en trouvant des indices"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "dans ce labyrinthe"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject2(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if object2Story == 2:
+        
+        text1 = "Bougez avec les fleches"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Et trouvez la sortie !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject2(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if object2Story == 3:
+        
+        labyrinthe(x,y)
+        
+        
+        
+    if object2Story == 4:
+    
+        text1 = "Felicitations"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Vous trouvez un indice !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Le coupable avait un monocle !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordObject = centerObject(monocle, lenghtScreen / 2, widthScreen / 2 + 40)
+        pyxel.blt(coordObject[0], coordObject[1], 1, monocle[0], monocle[1], monocle[2], monocle[3])
+        
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1End(coordButton[0], coordButton[0], buttonArrow)
+        
+
+
+
+
+def enigme():
+    
+    global object3Story, resultToAsk
+    
+    if pyxel.btn(pyxel.KEY_SPACE):
+        
+        object3Story = object3Story + 1
+        resultToAsk = resultToAsk + 1
+        
+        
+
+        
+        
+def objectScene1():
+    
+    
+    if object1Story == 0:
+        
+        text1 = "Tiens ! Un siege..."
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "bleu... !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Menons l enquete ! "
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+    if object1Story == 1:
+        
+        text1 = "Resolvez l enigme"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Cliquez sur les techniciens"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Pour les deplacer"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if object1Story == 2:
+        
+        text1 = "Et frayez vous"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "un chemin vers la sortie"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if object1Story == 3:
+        
+        casseTete1()
+        
+        
+        
+    if object1Story == 4:
+    
+        text1 = "Felicitations"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 16 * 2, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Vous trouvez un indice !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Le coupable portait du bleu !"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 16 * 2 + 20, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        coordObject = centerObject(cadre, lenghtScreen / 2, widthScreen / 2 + 40)
+        pyxel.blt(coordObject[0], coordObject[1], 1, cadre[0], cadre[1], cadre[2], cadre[3])
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonObject1End(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+        
+
+
+    
+def intro():
+    
+    global actualIntro
+
+    
+    if actualIntro == 1:
+        
+        text1 = "Festival de Cannes - 18h22"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Resultat du concours"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+    if actualIntro == 2:
+        
+        text1 = "Le film le plus prometteur,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "Le dernier a l'ecran..."
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if actualIntro == 3:
+        
+        text1 = "a ete sabote !"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if actualIntro == 4:
+        
+        text1 = "Charles Atan,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "realisateur du film,"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "est devaste"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+        
+    if actualIntro == 5:
+        
+        text1 = "Mais le coupable, ne savez pas"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -20, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "QUE VOUS,"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "Inspecteur Bob"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 , text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        text4 = "assistait a la projection !"
+        coord4 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text4)
+        pyxel.text(coord4[0], coord4[1], text4, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        
+    if actualIntro == 6:
+            
+        text1 = "Grace a votre loupe magique,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "et votre talent inne,"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "d'inspecteur chevronne,"
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+            
+            
+            
+    if actualIntro == 7:
+            
+        text1 = "Aidez Monsieur l'Atan,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -20, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = "et resolvez l enquete"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 - 10, text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        text3 = "pour la justice, le cinema..."
+        coord3 = centerText(widthScreen / 2, lenghtScreen / 2 , text3)
+        pyxel.text(coord3[0], coord3[1], text3, 7)
+        
+        text4 = "Mais surtout pour"
+        coord4 = centerText(widthScreen / 2, lenghtScreen / 2 + 10, text4)
+        pyxel.text(coord4[0], coord4[1], text4, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+            
+            
+            
+    if actualIntro == 8:
+            
+        text1 = "La reputation,"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 -10, text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        text2 = " et du pop-corn gratuit !"
+        coord2 = centerText(widthScreen / 2, lenghtScreen / 2 , text2)
+        pyxel.text(coord2[0], coord2[1], text2, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+        
+        buttonIntro(coordButton[0], coordButton[0], buttonArrow)
+            
+            
+            
+    if actualIntro == 9:
+            
+        text1 = "Bonne chance inspecteur"
+        coord1 = centerText(widthScreen / 2, lenghtScreen / 2 , text1)
+        pyxel.text(coord1[0], coord1[1], text1, 7)
+        
+        
+        coordButton = [(widthScreen / 16) * 14, (lenghtScreen / 16) * 14]
+        
+        buttonIntroEnd(coordButton[0], coordButton[0], buttonArrow)
+        
+    
+    
+def centerText(x, y, text):
+    
+    heightLetter = 5
+    espaceLetter = 4
+    
+    return [ x - (len(text) / 2) * espaceLetter, y - heightLetter / 2 ]
+
+
+def centerObject(tab, posX, posY):
+    
+    #tab = [x, y, width, lenght]
+    
+    x = posX - tab[2] / 2
+    y = posX - tab[3] / 2
+    
+    return [x, y]
+
+
+
+def buttonWin(x, y, button):
+
+    global winScene, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            winScene = winScene + 1
+                
+            waitPushButton = 20
+            
+
+
+
+def buttonObject1(x, y, button):
+
+    global object1Story, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            object1Story = object1Story + 1
+                
+            waitPushButton = 20
+            
+            
+            
+def buttonObject2(x, y, button):
+
+    global object2Story, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            object2Story = object2Story + 1
+                
+            waitPushButton = 20
+            
+            
+            
+def buttonObject3(x, y, button):
+
+    global object3Story, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            object3Story = object3Story + 1
+                
+            waitPushButton = 20
+            
+
+
+def buttonObject3End(x, y, button):
+    
+    
+    print("Yes")
+    global actualScene, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            actualObject = 0
+            
+            waitPushButton = 20
+
+
+
+            
+def buttonResult(x, y, button):
+
+    global resultScene, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            resultScene = resultScene+ 1
+                
+            waitPushButton = 20
+            
+            
+            
+def buttonObject1End(x, y, button):
+
+    global actualObject, waitPushButton
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:          
+                
+            actualObject = 0
+                
+            waitPushButton = 20
+
+
+
+
+def buttonIntro(x, y, button, end = False):
+
+    global actualIntro, waitPushButton, actualScene
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+            
+            if end == True:
+                
+                actualScene = actualScene + 1
+                
+            else:
+                
+                actualIntro = actualIntro + 1
+                
+            waitPushButton = 20
+            
+            
+            
+def buttonIntroEnd(x, y, button):
+    
+    global waitPushButton, actualScene
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+
+            actualScene = actualScene + 1  
+            waitPushButton = 20
+            
+            
+            
+def buttonToResult(x, y, button):
+    
+    global waitPushButton, actualScene
+    
+    coordButton = centerObject(button, x, y)
+    
+    pyxel.blt(coordButton[0], coordButton[1], 1, button[0], button[1], button[2], button[3], 0)
+    
+    if pyxel.mouse_x <= x + button[2] / 2 and pyxel.mouse_x >= x - button[2] / 2 and pyxel.mouse_y <= y + button[3] / 2 and pyxel.mouse_y >= y - button[3] / 2:
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+
+            actualScene = actualScene + 1  
+            waitPushButton = 20
+            
+            
+
+def object1_f():
+    
+    global waitPushButton, actualObject
+    
+    coordObject1 = [32, 96]
+    
+    pyxel.blt(coordObject1[0], coordObject1[1], 1, object1[0], object1[1], object1[2], object1[3], 0)
+    
+    if pyxel.mouse_x <= coordObject1[0] + object1[2] / 2 and pyxel.mouse_x >= coordObject1[0] and pyxel.mouse_y <= coordObject1[1] + object1[3] / 2 and pyxel.mouse_y >= coordObject1[1]:
+        
+        pyxel.blt(coordObject1[0], coordObject1[1], 1, object1[0], object1[1] + 8, object1[2], object1[3], 0)
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+
+            actualObject = 1 
+            waitPushButton = 20
+            
+            
+            
+            
+def object2_f():
+    
+    global waitPushButton, actualObject
+    
+    coordObject2 = [108, 112]
+    
+    pyxel.blt(coordObject2[0], coordObject2[1], 1, object2[0], object2[1], object2[2], object2[3], 0)
+    
+    if pyxel.mouse_x <= coordObject2[0] + object2[2] / 2 and pyxel.mouse_x >= coordObject2[0] and pyxel.mouse_y <= coordObject2[1] + object2[3] / 2 and pyxel.mouse_y >= coordObject2[1]:
+        
+        pyxel.blt(coordObject2[0], coordObject2[1], 1, object2[0], object2[1] + 8, object2[2], object2[3], 0)
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+
+            actualObject = 2 
+            waitPushButton = 20
+            
+            
+def object3_f():
+    
+    global waitPushButton, actualObject
+    
+    coordObject3 = [24, 64]
+    
+    pyxel.blt(coordObject3[0], coordObject3[1], 1, object3[0], object3[1], object3[2], object3[3], 0)
+    
+    if pyxel.mouse_x <= coordObject3[0] + object3[2] / 2 and pyxel.mouse_x >= coordObject3[0] and pyxel.mouse_y <= coordObject3[1] + object3[3] / 2 and pyxel.mouse_y >= coordObject3[1]:
+        
+        pyxel.blt(coordObject3[0], coordObject3[1], 1, object3[0], object3[1] + 8, object3[2], object3[3], 0)
+        
+        if (pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 1) or pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT, 100, 0)) and waitPushButton <= 0:
+
+            actualObject = 3 
+            waitPushButton = 20
+            
+            
+            
+            
+def casseTete1():
+    
+    global niveau1Affiche
+    global appui1
+    global appui21
+    global appui22
+    global appui23
+    global appui24
+    global niveau, object1Story, resultToAsk
+    
+    pyxel.bltm(0, 0, 0, 80 * 8, 0, 128, 128)
+    
+    for i in range(5):
+        
+        quadrillage.append([])
+        
+        for j in range(5):
+            quadrillage[i].append([i,j])
+            
+    pyxel.blt(24, 24, 2, 128, 0, 80, 80, 0)
+    pyxel.blt(104-16,24-16, 1, 16, 32, 16, 16, 0)
+    
+    if niveau == 1 :
+        
+        if appui1 == False:
+            pyxel.blt(24, 90, 1, 16, 64, 16, 16, 0)
+        
+        if niveau1Affiche == True:
+            quadrillage[3][0].append(True)
+            quadrillage[4][0].append(True)
+            
+            niveau1Affiche = False
+            
+        if pyxel.mouse_x >= 71 and pyxel.mouse_x <= 103 and pyxel.mouse_y >= 24 and pyxel.mouse_y <= 39 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+            appui1 = True
+            
+        if appui1 == True:
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[3][0][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(90, 24, 1, 16, 64, 16, 16, 0)
+            
+            coordWin = centerText(widthScreen / 2, lenghtScreen / 16 * 2, "Niveau 1 fini  ")
+            pyxel.text(coordWin[0], coordWin[1], "Niveau 1 fini  ", 7)
+            
+            if pyxel.frame_count % 60 == 0:
+                
+                niveau = 2
+            
+        else :
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[3][0][1]*16+24, 1, 0, 16, 32, 16, 0)
+        
+        
+    elif niveau == 2:
+        
+        if appui21 == False:
+            pyxel.blt(24, 90, 1, 16, 64, 16, 16, 0)
+        
+        if pyxel.mouse_x >= 56 and pyxel.mouse_x <= 86 and pyxel.mouse_y >= 88 and pyxel.mouse_y <= 102 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+            appui24 = True
+            
+        if appui24 == True:
+            if pyxel.mouse_x >= 56 and pyxel.mouse_x <= 70 and pyxel.mouse_y >= 56 and pyxel.mouse_y <= 86 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+                appui23 = True
+                
+        if appui23 == True:
+            if pyxel.mouse_x >= 72 and pyxel.mouse_x <= 102 and pyxel.mouse_y >= 56 and pyxel.mouse_y <= 70 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+                appui22 = True
+                
+        if appui22 == True:
+            if pyxel.mouse_x >= 88 and pyxel.mouse_x <= 102 and pyxel.mouse_y >= 24 and pyxel.mouse_y <= 54 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+                appui21 = True
+                    
+            
+        if appui21 == True and appui22 == True and appui23 == True and appui24 == True:
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][4][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(quadrillage[4][0][0]*16+24,quadrillage[0][1][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][3][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(90, 24, 1, 16, 64, 16, 16, 0)
+            
+            coordWin = centerText(widthScreen / 2, lenghtScreen / 16 * 2, "Niveau 2 fini  ")
+            pyxel.text(coordWin[0], coordWin[1], "Niveau 2 fini  ", 7)
+            
+            if pyxel.frame_count % 30 == 0:
+                
+                resultToAsk = resultToAsk + 1
+                object1Story = 4
+                
+        elif appui22 == True and appui23 == True and appui24 == True and appui21 == False:
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][4][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(quadrillage[4][0][0]*16+24,quadrillage[0][0][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][3][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 0, 16, 32, 16, 0)
+        elif appui23 == True and appui24 == True and appui22 == False and appui21 == False:
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][4][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(quadrillage[4][0][0]*16+24,quadrillage[0][0][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][3][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 0, 16, 32, 16, 0)
+        elif appui24 == True and appui23 == False and appui22 == False and appui21 == False:
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][4][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(quadrillage[4][0][0]*16+24,quadrillage[0][0][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 0, 16, 32, 16, 0)
+        else :
+            pyxel.blt(quadrillage[4][0][0]*16+24,quadrillage[0][0][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 48, 16, 16, 32, 0)
+            pyxel.blt(quadrillage[3][0][0]*16+24,quadrillage[0][2][1]*16+24, 1, 0, 16, 32, 16, 0)
+            pyxel.blt(quadrillage[2][0][0]*16+24,quadrillage[0][4][1]*16+24, 1, 0, 16, 32, 16, 0)
+            
+
+
+def labyrinthe(directionX, directionY):
+    
+    global object2Story, resultToAsk
+    global x
+    global y
+    
+    if pyxel.btn(pyxel.KEY_UP) == True:
+        y = y - 1
+    
+    if pyxel.btn(pyxel.KEY_DOWN) == True:
+        y = y + 1
+        
+    if pyxel.btn(pyxel.KEY_RIGHT) == True:
+        x = x + 1
+        
+    if pyxel.btn(pyxel.KEY_LEFT) == True:
+        x = x - 1
+    
+    global sceneCourante
+    global reinitPos
+
+    
+    if sceneCourante == 1:
+        pyxel.bltm(0, 0, 0, 0, 64*8, 128, 128)
+        
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 2
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 13
+            reinitPos = True
+            
+        if directionX >= 118 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 11
+            reinitPos = True
+    
+    if sceneCourante == 2:
+        pyxel.bltm(0, 0, 0, 0, 48*8, 128, 128)
+                
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 3
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 1
+            reinitPos = True
+        
+    if sceneCourante == 3:
+        pyxel.bltm(0, 0, 0, 0, 32*8, 128, 128)
+                
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 4
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 2
+            reinitPos = True
+            
+        if directionX >= 118 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 7
+            reinitPos = True
+        
+    if sceneCourante == 4:
+        pyxel.bltm(0, 0, 0, 0, 16*8, 128, 128)
+                    
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 3
+            reinitPos = True
+            
+        if directionX >= 118 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 5
+            reinitPos = True
+        
+    if sceneCourante == 5:
+        pyxel.bltm(0, 0, 0, 16*8, 16*8, 128, 128)
+                
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 6
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 7
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 4
+            reinitPos = True
+        
+    if sceneCourante == 6:
+        pyxel.bltm(0, 0, 0, 16*8, 0, 128, 128)
+                    
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 5
+            reinitPos = True
+            
+        if pyxel.frame_count % 150 == 0:
+            
+            resultToAsk = resultToAsk + 1
+            object2Story = 4
+        
+    if sceneCourante == 7:
+        pyxel.bltm(0, 0, 0, 16*8, 32*8, 128, 128)
+                
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 5
+            reinitPos = True
+            
+        if directionX >= 118 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 8
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 3
+            reinitPos = True
+        
+    if sceneCourante == 8:
+        pyxel.bltm(0, 0, 0, 32*8, 32*8, 128, 128)
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 9
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 7
+            reinitPos = True
+        
+    if sceneCourante == 9:
+        pyxel.bltm(0, 0, 0, 32*8, 48*8, 128, 128)
+        
+        
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 8
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 10
+            reinitPos = True
+        
+    if sceneCourante == 10:
+        pyxel.bltm(0, 0, 0, 32*8, 64*8, 128, 128)
+        
+        
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 9
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 11
+            reinitPos = True
+        
+    if sceneCourante == 11:
+        pyxel.bltm(0, 0, 0, 16*8, 64*8, 128, 128)
+        
+        
+        if directionX >= 118 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 10
+            reinitPos = True
+            
+        if directionX >= 53 and directionX <= 61 and directionY >= 116:
+            sceneCourante = 12
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 56 and directionY <= 59:
+            sceneCourante = 1
+            reinitPos = True
+        
+    if sceneCourante == 12:
+        pyxel.bltm(0, 0, 0, 16*8, 80*8, 128, 128)
+        
+        
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 11
+            reinitPos = True
+            
+        if directionX <= -4 and directionY >= 32 and directionY <= 40:
+            sceneCourante = 13
+            reinitPos = True
+        
+    if sceneCourante == 13:
+        pyxel.bltm(0, 0, 0, 0, 80*8, 128, 128)
+        
+        
+        if directionX >= 51 and directionX <= 61 and directionY <= -1:
+            sceneCourante = 1
+            reinitPos = True
+            
+        if directionX >= 118 and directionY >= 32 and directionY <= 40:
+            sceneCourante = 12
+            reinitPos = True
+            
+    
+    if reinitPos == True:
+        x, y = 128/2-8, 128/2-8
+        reinitPos = False
+            
+    if reinitPos == False:    
+        pyxel.blt(directionX, directionY, 1, 16, 64, 16, 16, 0)
+        
+        
+        
+def memory():
+    
+    global object3Story, resultToAsk
+    
+    pyxel.bltm(0, 0, 0, 64*8, 0, 128, 128)
+    
+    pyxel.blt(24, 40, 1, 0, 80, 16, 16)
+    pyxel.blt(24+2*16, 40, 1, 0, 80, 16, 16)
+    pyxel.blt(24+4*16, 40, 1, 0, 80, 16, 16)
+    
+    pyxel.blt(24, 40+2*16, 1, 0, 80, 16, 16)
+    pyxel.blt(24+2*16, 40+2*16, 1, 0, 80, 16, 16)
+    pyxel.blt(24+4*16, 40+2*16, 1, 0, 80, 16, 16)
+    
+    x = pyxel.mouse_x
+    y = pyxel.mouse_y
+    
+    if x >= 24 and x <= 40 and y >= 40 and y <= 56 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(24, 40, 1, 32, 96, 16, 16)
+    
+    if x >= 56 and x <= 72 and y >= 40 and y <= 56 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(56, 40, 1, 16, 96, 16, 16)
+        
+        
+    if x >= 88 and x <= 104 and y >= 40 and y <= 56 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(88, 40, 1, 32, 96, 16, 16)
+        
+    if x >= 24 and x <= 40 and y >= 72 and y <= 88 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(24, 72, 1, 16, 96, 16, 16)
+        
+    if x >= 56 and x <= 72 and y >= 72 and y <= 88 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(56, 72, 1, 0, 96, 16, 16)
+        
+        if pyxel.frame_count % 30 == 0:
+            
+            object3Story = object3Story + 1
+            resultToAsk = resultToAsk + 1
+        
+    if x >= 88 and x <= 104 and y >= 72 and y <= 88 and pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+        pyxel.blt(88, 72, 1, 32, 96, 16, 16)
+    
+    
+
+
+#pyxel.bltm(0, 0, 0, 115, 0, 128, 128, 0)
+pyxel.run(update, draw)
