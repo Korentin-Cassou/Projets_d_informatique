@@ -1,1 +1,9 @@
+Ce mini-jeu est simplement un prototype fait durant une game jam à laquelle j'ai participé en seconde, d'où le fait qu'il ne soit que très peu abouti comme vous pourrez le voir. 
+Il n'est constitué que de 2 niveaux et d'un menu aux interfaces très peu travaillées car je n'avais que peu de temps pour réaliser le jeu et que je débutais sur Game Maker.
 
+La game jam avait pour sujet "alea jacta est" il me semble d'où la prédominance des dés. Le concept que j'ai choisi était que toutes les 10 secondes, un dé était lancé déterminant 
+le pouvoir à disposition du joueur pour les 10 prochaines secondes. Je comptais faire un vrai jeu basé sur ce prototype car j'aimais beaucoup le concept.
+
+Ce prototype ce joue avec la souris pour tirer / utiliser un pouvoir et les touches Z/Q/S/D pour se déplacer.
+
+Vous pouvez le trouver et l'essayer sur ma page itch.io : https://kokomori.itch.io/wizard-of-dices
