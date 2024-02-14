@@ -13,4 +13,4 @@ Le premier est un filtre photo (nécessitant le module PIL) qui, à partir d'une
 Le second est un puissance 4 (où l'on peut chosir le nombre de pions à aligner, de colonnes et de lignes), jouable dans la console.
 
 Le troisième est un générateur automatique de fichier NFO renvoyant un NFO à partir d'un album de musique fourni (nécessite le module mutagen).
-Le fichier intitulé "Dookie by Green Day.nfo" est un exemple de résultat de ce programme.
+Le fichier intitulé "Dookie - by Green Day.nfo" est un exemple de résultat de ce programme.
