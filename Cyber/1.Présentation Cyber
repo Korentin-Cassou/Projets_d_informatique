@@ -1,0 +1,24 @@
+Cyber est sans doute le projet sur lequel j'ai passé le plus de temps (au moins la moitié de mes vacances d'été). Bien qu'il ne soit pas encore fini, je le pense déjà très avancé.
+
+C'est un jeu vidéo fait pour téléphone sur Game Maker (mais je passerai peut-être sur Python avec le module pygame pendant les prochaines vacances car je trouve la POO plus simple et ouverte avec python),
+entre Enter the Gungeon et Magic Survival. Ce jeu en contient en réalité 4 (le jeu principal et 3 mini-jeux) dont 2 sont finis (dans le sens où ils sont parfaitement jouables, même si du contenu sera raouté)
+Dans Cyber (nom non-définitif), vous incarnez un cyborg (Ulysse) se réveillant après plusieurs années de sommeil, possédé par une IA qui a besoin de vous pour atteindre une des dernières grandes villes encore 
+debout sur Terre. En suivant le chemin vers la ville, vous rencontrerez plusieurs cyborgs déréglés qu'il vous faudra combattre, mais aussi des alliés qui vous raconteront leur histoire, et vous découvrirez le
+passé d'Ulysse.
+
+Le jeu principal est du même genre que Magic Survival: vous vous baladez sur un territoire infinie où des ennemis apparaissent pour vous attaquer. En les tuant, vous récupérerez de l'expérience pour vous 
+améliorer, de l'argent pour acheter dans le menu principal des objets ou de nouveaux personnages, et de l'argent à dépenser pour votre partie au près de marchand. Pour gagner et avancer dans l'histoire, il vous 
+faudra tenir sur la carte pour chauqe niveau un certain nombre de temps, mais il vous sera aussi possible de continuer la partie plus longtemps avec une difficulté augmentée si vous le souhaitez.
+Certains lieux spécifiques apparaîtront sur la carte (certains pour faire avancer l'histoire, d'autres seront des marchands, et les derniers seront des mini-jeux pour obtenir des artefacts).
+
+Présentation de ce qui a déjà était importé:
+- un menu à plusieurs page:
+  - une de crédit
+  - une pour jouer
+  - une est la boutique 
+  - une sert à équiper des personnages / des objets de départ
+  - une sert pour voir les quêtes en cours
+
+- Le début du jeu principal:
+  - le joueur peut se déplacer et rencontrer des lieux-dits
+  - il peut ouvrir le menu de pause, voir sa vie, utiliser des objets / des armes... 
