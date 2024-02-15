@@ -11,14 +11,37 @@ améliorer, de l'argent pour acheter dans le menu principal des objets ou de nou
 faudra tenir sur la carte pour chauqe niveau un certain nombre de temps, mais il vous sera aussi possible de continuer la partie plus longtemps avec une difficulté augmentée si vous le souhaitez.
 Certains lieux spécifiques apparaîtront sur la carte (certains pour faire avancer l'histoire, d'autres seront des marchands, et les derniers seront des mini-jeux pour obtenir des artefacts).
 
-Présentation de ce qui a déjà était importé:
+Présentation de ce qui a déjà était implanté:
 - un menu à plusieurs page:
   - une de crédit
   - une pour jouer
-  - une est la boutique 
+  - une est la boutique (où vous pouvez acheter objets de départs, objets à utiliser dans le jeu et personnages)
   - une sert à équiper des personnages / des objets de départ
   - une sert pour voir les quêtes en cours
 
 - Le début du jeu principal:
   - le joueur peut se déplacer et rencontrer des lieux-dits
   - il peut ouvrir le menu de pause, voir sa vie, utiliser des objets / des armes... 
+  - le système de collision avec des obstacles (objet de décor, ennemis...)
+
+- Le système qui sera utilisé pour les marchands (boîte de dialogue à choix multiples)
+
+- Le mini-jeu d'énigme: celui-ci est totalement terminé. Ce sont des énigmes du même type que rush hour, mais avec des entités informatiques et non des voitures. Votre IA (petit carré vert) doit trouver la sortie
+(petit carré violet marqué EXIT). Pour cela vous pouvez bougez les autres entités avec la souris (certaines entités ne se bougent que verticalement ou horizontalement, cela est indiqué par des flèches). Pour
+réussir totalement l'épreuve, il faut résoudre 3 épreuves dans le temps imparti.
+
+- L'écran de récompense en cas de victoire d'un artefact lors d'un mini-jeu (le joueur petu choisir sa récompense selon ses résultats à l'épreuve). Si celui-ci a perdu, il reçoit un malus.
+
+- Le mini-jeu de carte: 9 cartes sont disposées sur l'écran et vous occupez celle au centre. Les autres cartes peuvent être des adversaires, des armes, des objets ou des coffres. Votre but est d'obtenir le plus de
+pièces possibles (au moins 5). Pour cela, il vous faut cliquer sur une des cartes adjacentes ce qui vous fera prendre sa place et éxécutera son effet (vous gagnez une arme, frappez un adversaires, perdez de la vie
+si vous n'avez pas d'armes...). Pour l'instant, voici les entités ayant été créées:
+  -
+
+
+
+
+
+
+
+
+
