@@ -1,4 +1,4 @@
-Cyber est sans doute le projet sur lequel j'ai passé le plus de temps (au moins la moitié de mes vacances d'été). Bien qu'il ne soit pas encore fini, je le pense déjà très avancé.
+emCyber est sans doute le projet sur lequel j'ai passé le plus de temps (au moins la moitié de mes vacances d'été). Bien qu'il ne soit pas encore fini, je le pense déjà très avancé.
 
 C'est un jeu vidéo fait pour téléphone sur Game Maker (mais je passerai peut-être sur Python avec le module pygame pendant les prochaines vacances car je trouve la POO plus simple et ouverte avec python),
 entre Enter the Gungeon et Magic Survival. Ce jeu en contient en réalité 4 (le jeu principal et 3 mini-jeux) dont 2 sont finis (dans le sens où ils sont parfaitement jouables, même si du contenu sera raouté)
@@ -32,16 +32,59 @@ réussir totalement l'épreuve, il faut résoudre 3 épreuves dans le temps impa
 
 - L'écran de récompense en cas de victoire d'un artefact lors d'un mini-jeu (le joueur petu choisir sa récompense selon ses résultats à l'épreuve). Si celui-ci a perdu, il reçoit un malus.
 
-- Le mini-jeu de carte: 9 cartes sont disposées sur l'écran et vous occupez celle au centre. Les autres cartes peuvent être des adversaires, des armes, des objets ou des coffres. Votre but est d'obtenir le plus de
+- Le mini-jeu de carte (terminé): 9 cartes sont disposées sur l'écran et vous occupez celle au centre. Les autres cartes peuvent être des adversaires, des armes, des objets ou des coffres. Votre but est d'obtenir le plus de
 pièces possibles (au moins 5). Pour cela, il vous faut cliquer sur une des cartes adjacentes ce qui vous fera prendre sa place et éxécutera son effet (vous gagnez une arme, frappez un adversaires, perdez de la vie
 si vous n'avez pas d'armes...). Pour l'instant, voici les entités ayant été créées:
-  -
+  -Ennemis:
+    - un robot arignée avec peu de pv / attaque
+    - un cyborg de pv moyens
+    - un distributeur déréglé avec beaucoup de point de vie
+    - un téléporteur qui se téléporte quand on le frappe
+    - un drone qui lâche une bombe quand il meurt
+
+  -Armes:
+    - un katana classique
+    - un pistolet faisant des dégâts à toute la rangée / colonne visée
+    - un railgun tuant tous les ennemis sur la rangée
+    - une épée vampire vous soignant à chaque coup
+    - une épée à double tranchant ayant une chance sur 2 de faire le double de dégâts et une chance sur deux de vous faire subir ces dégâts
+
+  -Objets
+    - des pièces
+    - une bombe explosant toute une ligne une fois le compte à rebours terminé
+    - une potion de soin
+    - du poison qui vous fait un dégât par tour jusqu'à ce que n'ayez plus qu'un point de vie
+    - une forge qui améliore et restaure la durabilité de votre arme
+    - une carte mélangeant toutes les cartes sur le terrain
+
+  -Coffres:
+    - coffre normal délivrant un objet d'aide ou une mimique
+    - coffre épique délivrant beaucoup de pièces, un railgun ou une épée vampirique
+    - coffre maudit délivrant un ennemi ou un objet négatif
+    - une mimique qui vous attaque
+
+- Le système du mini-jeu de platformer: il contient les classiques d'un platformer pour l'instant; des pièces à ramasser, des téléporteurs, une porte de victoire, un ressor vous faisant rebondir, la possibilité 
+de dasher, de sauter (et de faire un double saut).
+
+Et enfin, voivi tous les objets implantés pour le moment dans le jeu principal ainsi que les différents personnages disponibles:
+- Ulysse (personnage de base)
+- Golden Ulysse (même stats qu'Ulysse mais augmente les gains de pièce)
+- Chara (en référence à Undertale - très forte attaque -)
+
+- un drone qui tourne autour de vous et tire des projectiles sur les adversaires (aléatoirement pour l'instant car aucun ennemi n'a été fait)
+- un pistolet qui vous permet de tirer des balles
+- un bras robotique (tir différents projectiles que le pistolet)
+- un nokia (augmente la résistance mais diminue la vitesse)
+- biskar (augmente la résistance aux dégâts)
+- coque Rinoshield (idem)
+- le Cloud (vous donne une seconde chance si vous mourrez)
+- une bombe (permet de lancer une bombe toutes les 40 secondes)
+- une clef à molette (augmente la régénération)
+- pile + (augmente l'attaque)
+- pile - (augmente la vie)
+- cerveau (augmente le temps imparti dans les mini-jeux d'énigme)
+- nanomachine (augmente la vitesse et l'attaque)
 
 
 
-
-
-
-
-
-
+Vous pourrez retrouvé de nombreuses photos dans ce dossier des différentes fonctions présentées (parfois les photos sont retournées car le jeu se joue parfois dans le sens vertical du téléphone).
